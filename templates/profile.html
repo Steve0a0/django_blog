@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+
+{% block profile %}
+<div class="card" style="display:flex; justify-content: center; margin: 50px auto; padding: 10px; width: 30px; height: 20px; ">
+<h1> Welcome   {{user.username}}</h1>
+</br>
+<form class="row g-3" method="POST">
+    {% csrf_token %}       
+    <div class="mb-3">
+        <label for="validationCustom01" class="form-label">First name</label>
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example"  value="{{user.first_name}}" >
+    </div>
+    <div class="mb-3">
+        <label for="validationCustom01" class="form-label">Last name</label>
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" value="{{user.last_name}}" >
+    </div>
+    <div class="mb-3">
+        <label for="validationCustom01" class="form-label">User Name</label>
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" value="{{user.username}}" >
+    <div class="mb-3">
+      <label for="inputEmail4" class="form-label">Email</label>
+      <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" value="{{user.email}}" >
+    </div>
+    <div class="mb-3">
+        <label for="aboutme" class="form-label">About me</label>
+        <textarea type="text" class="form-control" id="aboutmee" name="aboutme" placeholder="About Yourself!" value="{{profile.addme}}"></textarea>
+    </div>
+    <div class="button d-flex justify-content-center" style="display: inline-block; margin: 50px auto; ">
+    <button type="submit" class="btn btn-primary me-4">Save</button>
+    <button type="button" class="btn btn-primary">Edit</button>
+</div>
+</form>
+</div>
+{% endblock%}

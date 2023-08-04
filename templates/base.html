@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzS1OB3mIe9CxMqPhaQ9eCUW5rS2GR5L/1NzoD4nP4ffFVJ3qp1sZjG95O8I6S+" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <style>
+      #welcome{
+        padding: 10px;
+      }
+      #bg{
+        background-color: white;
+      }
+      .navbar-custom {
+        background-color: transparent;
+        border: none;
+       
+      }
+      .navbar-custom .navbar-brand {
+        color: black;
+        font-weight: bold;
+      }
+      .navbar-custom .navbar-nav .nav-link {
+        color: black;
+      }
+      .navbar-custom .navbar-nav .nav-link:hover {
+        color: lightgray;
+      }
+    </style>
+    
+</head>
+<body id='bg'>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'home'%}">Steve's Blog</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+              <div class="welcome" id="welcome">
+                <li class="nav-item">
+                  <h6>Welcome {{ user.username }}</h6>
+                </li>
+              </div>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-target="#" data-bs-toggle="dropdown" aria-expanded="false">
+                  Categories
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'categories' 'Technology' %}">Technology</a></li>
+                  <li><a class="dropdown-item" href="{% url 'categories' 'Education' %}">Education</a></li>
+                  <li><a class="dropdown-item" href="{% url 'categories' 'Lifestyle' %}">Lifestyle</a></li>
+                  <li><a class="dropdown-item" href="{% url 'categories' 'Business' %}">Business</a></li>
+                  <li><a class="dropdown-item" href="{% url 'categories' 'Science' %}">Science</a></li>
+                  <li><a class="dropdown-item" href="{% url 'categories' 'Personal Development' %}">Personal Development</a></li>
+                  <li><a class="dropdown-item" href="{% url 'categories' 'Arts and Culture' %}">Arts and Culture</a></li>
+                  <li><a class="dropdown-item" href="{% url 'categories' 'Environment and Sustainability' %}">Environment and Sustainability</a></li>
+                  <li><a class="dropdown-item" href="{% url 'categories' 'Parenting and Family' %}">Parenting and Family</a></li>
+                  <li><a class="dropdown-item" href="{% url 'categories' 'Sports and Fitness' %}">Sports and Fitness</a></li>
+                </ul>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'addpost' %}">New Post</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'contact' %}">Contact</a>
+              </li>
+            </ul>
+            <div class="nav justify-content-end" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                <form action="{% url 'logout' %}" method="POST">
+                  {% csrf_token %}
+                  <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
+                </form>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
+                </li>
+              {% endif %}
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+    </nav>
+
+  <br>
+  <br>
+  <br>
+  <br>
+<div class="cards">
+  {% block card %}
+  {% endblock%}
+</div>
+
+<div class="postcards">
+  {% block postcard %}
+  {% endblock%}
+</div>
+<div class="profile">
+  {% block profile %}
+  
+  {% endblock%}
+</div>
+  
+<div class="contact">
+  {% block contact %}
+  
+  {% endblock%}
+</div>
+<div class="delete">
+  {% block delete %}
+  
+  {% endblock%}
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block card %}
+
+<h1>{{ cats }}</h1>
+<hr>
+{% for post in categoriess %} 
+<div class="card text-center shadow-lg p-3 mb-5 bg-body-tertiary card-custom" style="width: 70rem; margin: 20px auto;">
+    <div class="card-body">
+        <h4><a href="{% url 'article' post.pk %}">{{ post.title }}</a> - <small>{{ post.author }}</small></h4>  
+        <small><a href="{% url 'categories' post.categories%}">{{post.categories}}</a></small>
+        <br>
+        <small><a href="{% url 'update' post.pk %}">Edit</a></small> 
+        
+        <small><a href="{% url 'delete' post.pk %}">Delete</a></small>
+        <p>{{ post.content | slice:":200"|safe }}</p>
+    </div>
+</div>
+   
+{% endfor %}
+
+{% endblock %}

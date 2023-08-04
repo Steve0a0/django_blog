@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+
+{% block card %}
+<div class="card text-center mb-3" style="width: 40rem;margin: 30px auto; padding: 10px;">
+    <div class="card-body">
+      <h5 class="card-title">Sign Up</h5>
+      <br>
+    
+      <form class="row g-3" method="POST">
+        {% csrf_token %}
+        <div class="col-md-6">
+            <label for="validationCustom01" class="form-label">First name</label>
+            <input type="text" class="form-control" id="validationCustom01" name= 'fname'required>
+        </div>
+        <div class="col-md-6">
+            <label for="validationCustom01" class="form-label">Last name</label>
+            <input type="text" class="form-control" id="validationCustom01" name= 'lname' required>
+        </div>
+        <div class="col-md-6">
+            <label for="validationCustom01" class="form-label">User Name</label>
+            <input type="text" class="form-control" id="validationCustom01"name= 'username' required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Email</label>
+          <input type="email" class="form-control" id="inputEmail4"name= 'email'>
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword4" class="form-label">Password</label>
+          <input type="password" class="form-control" id="inputPassword4"name= 'pass1'>
+        </div>
+        <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="inputPassword4"name= 'pass2'>
+          </div>
+          <br>
+          <br>
+          <br>
+          {% comment %} <div class="row mb-3">
+             <label for="textarea">About Me</label>
+            <textarea class= "form-control"name="aboutme" id="" cols="100" rows="5"> </textarea>
+        </div> {% endcomment %}
+         
+        
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+
+    <div class="smalllogin">
+        <h6>Access Account!</h6>
+        <p><a href="{% url 'login' %}" class="link-primary">Log In</a></p>
+    </div>
+      </form>
+    </div>
+  </div>
+{% endblock  %}

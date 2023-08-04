@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block card %}
+
+<br>
+<br>
+
+
+<h1>{{posts.title}}</h1>
+current user:{{user.id}}
+author id:{{posts.author.id}}
+<small> By: {{posts.author}} 
+</small>
+<small>{{posts.publication_time}} {{posts.categories}}</small>
+{% if user.is_authenticated %}
+{% if user.id == posts.author.id %}
+
+<small><a href="{% url 'update' posts.pk %}">Edit</a></small> 
+<small><a href="{% url 'delete' posts.pk %}">Delete</a></small>
+{% endif %}
+{% endif %}
+<hr>
+{{posts.image}}
+<h6>{{posts.content}}</h6>
+
+<a href="{% url 'home' %}" class="btn btn-primary">Back</a>
+<br>
+<br>
+<hr>
+
+{% if user.is_authenticated %}
+    <form method="POST" action="{% url 'likes' posts.pk %}">
+        {% csrf_token %}
+        {% if user in posts.likes.all %}
+            <small>
+                <button type="submit" class="btn btn-info" name="like" value="unlike">Unlike</button>
+            </small>
+        {% else %}
+            <small>
+                <button type="submit" class="btn btn-info" name="like" value="like">Like</button>
+            </small>
+        {% endif %}
+    </form>
+{% endif %}
+
+{% endblock %}

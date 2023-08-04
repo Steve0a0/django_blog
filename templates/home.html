@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home page
+{% endblock %}
+
+{% block card %}
+<div class="card text-center shadow-lg p-3 mb-5 bg-body-tertiary card-custom" style="width: 70rem; margin: 20px auto;">
+    <div class="card-body">
+        <h5 class="card-title">
+            <h1>Welcome {{ user.username }}</h1>
+            <p class="card-text">How's your day going?</p>
+            {% if user.is_authenticated %}
+            <a href="{% url 'addpost' %}" class="btn btn-primary">Create Post +</a>
+            {% endif %}
+        </h5>
+    </div>
+</div>
+<hr>
+
+{% for post in posts %}
+<div class="card text-center shadow-lg p-3 mb-5 bg-body-tertiary card-custom" style="width: 70rem; margin: 20px auto;">
+        <div class="card-body">
+            <h4><a href="{% url 'article' post.pk %}">{{ post.title }}</a> - <small>{{ post.author }}</small></h4>  
+            <small><a href="{% url 'categories' post.categories%}">{{post.categories}}</a></small>
+            <br>
+            
+            <small><a href="{% url 'update' post.pk %}">Edit</a></small> 
+            
+            <small><a href="{% url 'delete' post.pk %}">Delete</a></small>
+            
+            <p>{{ post.content | slice:":200"|safe }}</p>
+        </div>
+        <hr>
+</div>
+{% endfor %}
+
+{% endblock %}

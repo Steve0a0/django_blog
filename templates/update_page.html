@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block postcard %}
+{% if user.is_authenticated %}
+{% if user.id == posts.author.id %}
+<div class="card text-center shadow-lg p-3 mb-5 bg-body-tertiary card-custom" style="width: 60rem; margin: 30px auto; ">
+    <div class="card-body">
+        <h5 class="card-title">
+            <h4>Update Post</h4>
+            <br>
+            <br>
+                <form class="row g-3" method="POST" >
+                    {% csrf_token %}
+                    <div class="mb-3"">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{posts.title}}">
+                    </div>
+                    <div class="mb-3"">
+                        <label for="content" class="form-label">Content</label>
+                        <textarea class="form-control" id="content" name="content" placeholder="Add your Content" value = "">{{posts.content}}</textarea>
+                    </div>
+                    <div class="mb-3"">
+                        <label for="author" class="form-label">Author</label>
+                        <input type="text" class="form-control" id="author" name="author" value="{{user.username}}" readonly >
+                    </div>
+                    
+                    
+                    <div class="mb-3">
+                        <label for="inputState" class="form-label">Categories</label>
+                        <select id="inputState" class="form-select" name="categories">
+                          <option selected>Choose...</option>
+                          <option>Technoloy</option>
+                          <option>Education</option>
+                          <option>Lifestyle</option>
+                          <option>Business</option>
+                          <option>Science</option>
+                          <option>Personal Development</option>
+                          <option>Arts and Culture</option>
+                          <option>Environment and Sustainability</option>
+                          <option>Parenting and Family</option>
+                          <option>Sports and Fitness</option>
+                        </select>
+                    </div>
+                        <div class="mb-3"">
+                            <label for="inputState" class="form-label">Upload </label>
+                            <input type="file" class="form-control" id="inputGroupFile02" name="upload">
+
+                          </div>
+                    
+                    <div class="submit">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+                
+                
+            </div>
+            
+        </h5>
+    </div>
+</div>
+{% else %}
+you are not allowed here
+{% endif %}
+{% endif %}
+{% endblock %}
